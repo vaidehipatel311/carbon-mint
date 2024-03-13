@@ -1,0 +1,52 @@
+.form {
+    width: 436px;
+    height: 373px;
+    margin-left: 864px;
+    gap: 48px;
+    text-align: center;
+}
+
+.graphicSide {
+    height: 728px;
+    width: 770px
+}
+
+.logo {
+    width: 436px;
+    height: 60px;
+    gap: 8px;
+    margin-bottom: 30px;
+
+}
+
+.finalLogo {
+    width: 165px;
+    height: 60px;
+}
+
+.button {
+    width: 200px;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid black;
+    background-color: #8CD867;
+    gap: 8px;
+    margin-top: 16px
+}
+
+.otheracc {
+    font-family: "manrope";
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 21.86px;
+    color: #232D42;
+    width: 226px;
+    height: 22px;
+}
+
+.signintext {
+    font-family: "barlow";
+    font-weight: 600;
+    font-size: 33px;
+    line-height: 42.9px;
+}

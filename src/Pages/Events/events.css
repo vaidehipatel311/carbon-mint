@@ -1,0 +1,172 @@
+.cards {
+    width: 380px;
+    padding: 5px;
+    border: 1px solid black;
+    margin-bottom: 20px;
+}
+
+.ev-filter-icon {
+    padding: 10px 10px 10px 10px;
+    background-color: rgb(249, 246, 246);
+    margin-top: 10px;
+    margin-left: 10px;
+    padding-right: 10px;
+}
+
+.grid-button {
+    height: 20px;
+    background-color: #FBE5D8;
+    border-radius: 4px;
+    font-size: 13px;
+    margin-left: 4px;
+    border: 1px;
+}
+
+.fieldname {
+    margin-right: 5px;
+    /* margin-left: 5px; */
+    font-size: 16px;
+    font-family: sans-serif;
+    font-weight: 600;
+    padding-left: 20px;
+    padding-top: 5px;
+}
+
+.crop-name {
+    padding-left: 5px;
+    font-size: 16px;
+    font-family: sans-serif;
+    font-weight: 600;
+    padding-top: 5px;
+
+}
+
+.date,
+.time {
+    margin-right: 5px;
+    font-size: 14px;
+    font-family: sans-serif;
+    padding-left: 20px;
+}
+
+.vector-img {
+    padding-top: 10px;
+    padding-left: 60px;
+}
+
+.filter {
+    padding-left: 20px;
+}
+
+.textfield {
+    height: 30px;
+    width: 215px;
+}
+
+.select {
+    height: 30px;
+    width: 223px;
+}
+
+.buttons {
+    height: 25px;
+    width: 40px
+}
+
+.ev-close-img {
+    margin-bottom: 77px;
+    margin-left: -60px;
+    color: white;
+    font-size: bold;
+}
+
+.event-images {
+    margin-top: 30px;
+}
+
+.event-form {
+    height: 475px;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    border: 2px solid rgb(233, 230, 230);
+    border-radius: 8px;
+    width: 1200px;
+}
+
+.formheader {
+    padding: 10px;
+    background-color: rgba(233, 230, 230, 0.438);
+}
+
+.formheader .event-selection {
+    font-size: 16px;
+    top: 10px;
+    position: relative;
+
+}
+
+.textfields {
+    height: 50vh;
+    width: 560px;
+    margin-left: 50px;
+    margin-top: 30px;
+    gap: 20px;
+    display: grid;
+    overflow: auto;
+}
+
+
+
+.links {
+    /* margin-left: 300px; */
+    margin-top: 5px;
+}
+
+.links .profile-title {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 22px;
+    margin-right: 500px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.links .add-landparcel-btn {
+    font-size: 12px;
+    margin-top: -80px;
+    height: 40px;
+    margin-left: 900px;
+    color: black;
+    background: rgba(140, 216, 103, 1);
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.call-icon {
+    margin-left: 50px;
+    margin-top: 10px;
+    font-size: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.notes {
+    margin-top: 10px;
+    width: 320px;
+    border: 2px solid rgb(233, 230, 230);
+    padding: 10px;
+    border-radius: 10px;
+    line-height: 30px;
+    /* margin-left: 400px; */
+}
+
+.close-img {
+    margin-bottom: 75px;
+    margin-left: -30px;
+    color: white;
+    font-size: bold;
+}
+
+.three-buttons {
+    height: 30px;
+}

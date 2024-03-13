@@ -1,0 +1,188 @@
+.operator-grid,
+.event-grid,
+.crops-grid,
+.upcoming-grid,
+.yield-grid,
+.status-grid,
+.onboarding-grid,
+.events-list-grid,
+.todo-grid {
+    height: 100%;
+}
+
+.operator-dropdown {
+    height: 18px;
+    width: 85px;
+    margin-left: 80px;
+    border: none;
+    color: #79787A;
+
+}
+
+.operator-grid .date {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 12px;
+    letter-spacing: 0em;
+    margin-left: 70px;
+    color: #79787A;
+}
+
+.chart-img {
+    margin-top: 50px;
+    width: 100%;
+}
+
+.events-dropdown {
+    height: 18px;
+    width: 100px;
+    margin-left: 160px;
+    border: none;
+    color: #79787A;
+}
+
+.crops-dropdown {
+    height: 18px;
+    width: 90px;
+    margin-left: 30px;
+    border: none;
+    color: #79787A;
+
+}
+
+.crops-grid .lists {
+    margin-top: 240px;
+    font-size: 15px;
+    margin-left: 20px;
+}
+
+.upcoming-grid .date {
+    font-family: Barlow;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 12px;
+    letter-spacing: 0em;
+    margin-left: 90px;
+    color: #79787A;
+
+}
+
+.upcoming-grid .days {
+    display: flex;
+    margin-left: 15px;
+    font-family: Barlow;
+    margin-top: 40px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 12px;
+    letter-spacing: 0em;
+    color: #BCBCBC;
+    gap: 24px;
+}
+
+.upcoming-grid .numbers {
+    display: flex;
+    padding: 20px 10px 20px 10px;
+    border-radius: 8px;
+    gap: 16px;
+
+}
+
+.upcoming-grid .numbers .num-background {
+
+    height: 34px;
+    padding: 20px 5px 20px 5px;
+    border-radius: 8px;
+    background: #EFEFF0;
+}
+
+.upcoming-grid .upcoming-event {
+    color: black;
+    position: relative;
+    display: inline;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.upcoming-grid .upcoming-datetime {
+    color: #79787A;
+    position: relative;
+    display: inline;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+
+.yield-grid .states-dropdown {
+    height: 18px;
+    width: 100px;
+    margin-left: 150px;
+    border: none;
+    color: #79787A;
+
+}
+
+.yield-grid .yield-dropdown {
+    height: 18px;
+    width: 90px;
+    margin-left: 300px;
+    border: none;
+    color: #79787A;
+}
+
+.status-grid .india-img {
+    margin-top: 70px;
+    width: 100%;
+}
+
+.status-grid .status-dropdown {
+    height: 18px;
+    width: 85px;
+    margin-left: 35px;
+    border: none;
+    color: #79787A;
+
+}
+
+.status-grid .india-dotted-img {
+    margin-top: 170px;
+    left: -120px;
+    height: 76px;
+    position: relative;
+}
+
+.status-grid .person-location-img {
+    margin-top: 85px;
+    height: 56px;
+    left: -155px;
+    position: relative;
+
+}
+
+.status-grid .lists {
+    margin-top: 130px;
+    font-size: 15px;
+    position: absolute;
+    margin-left: 200px;
+}
+
+.onboarding-grid .person-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.events-lists-grid .content {
+    font-family: Barlow;
+    font-size: 14px;
+    line-height: 50px;
+    color: gray;
+    margin-left: 20px;
+    margin-top: 14px;
+
+}
+
+
+.todo-grid .checkbox {
+    margin-top: 40px;
+    margin-left: 40px;
+}

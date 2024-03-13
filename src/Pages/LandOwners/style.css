@@ -1,0 +1,28 @@
+.grid-item-cards {
+    height: 200px;
+    width: 200px;
+    border-radius: 10px;
+    border: 2px;
+    padding: 14px;
+}
+
+.grid-button {
+    height: 20px;
+    background-color: #FBE5D8;
+    border-radius: 4px;
+    font-size: 13px;
+    margin-left: 4px;
+    border: 1px;
+}
+
+.typo1 {
+    margin-right: 100px;
+    font-size: 13px;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: green;
+}
+
+.status-button {
+    background-color: rgba(255, 169, 8, 0.712);
+}

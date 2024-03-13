@@ -1,0 +1,106 @@
+.header {
+    background: #F9F9F9;
+    left: 270px;
+    height: 70px;
+    width: calc(100% - 270px);
+    position: relative;
+    z-index: 1200;
+}
+
+.elements {
+    height: 50px;
+    padding-top: 10px;
+    gap: 16px;
+
+}
+
+.content {
+    height: 48px;
+    padding: 0px 30px 0px 0px;
+    gap: 30px;
+    display: flex;
+}
+
+.left-icons {
+    display: inline;
+    height: 44px;
+    padding: 10px 16px 10px 16px;
+    gap: 10px;
+    margin-right: 820px;
+    /* width: 900px; */
+}
+
+.arrow-icon {
+    width: 24px;
+    height: 24px;
+    padding: 6.66px 0px 6.66px 0px;
+    padding-right: 920px;
+
+}
+
+.right-icons {
+    width: 350px;
+    height: 48px;
+    gap: 10px;
+    display: flex;
+
+}
+
+
+.user-name {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: left;
+    padding-left: 15px;
+}
+
+.agent {
+    font-family: Manrope;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 19px;
+    letter-spacing: 0em;
+    color: #2B9348;
+    padding-left: 14px;
+}
+
+.notify-div {
+    height: 55px;
+    width: 370px;
+    border: 1px solid #D7D7D7;
+    margin-bottom: 7px;
+    background-color: #F9F9F9;
+    padding: 5px 5px 5px 5px;
+}
+
+.photo {
+    margin-left: 5px;
+}
+
+.contact-img {
+    height: 100px;
+}
+
+.contact {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.address-details,
+.logout-details {
+    margin-top: 20px;
+}
+
+.business-icon,
+.phone-icon,
+.mail-icon,
+.logout-icon {
+    padding: 10px 20px 10px 20px;
+
+}
+
+.header-img {
+    height: 40px;
+}

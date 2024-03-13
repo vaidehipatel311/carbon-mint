@@ -2,7 +2,7 @@ import * as actionTypes from './actionTypes';
 import axios from '../../Utils/axios';
 import * as urls from '../../Config/urls';
 
-
+import * as urls from '../Events'
 export const addOperator = (formData) => {
     return async (dispatch) => {
         try {
@@ -40,7 +40,7 @@ export const addOperator = (formData) => {
                     "leased_doc_id": formData.leased_doc_id,
                     "survey_no": formData.survey_no,
                     "area": formData.area,
-                    "crops":formData.crops
+                    "crops": formData.crops
                 });
             dispatch({
                 type: actionTypes.ADD_OPERATOR,

@@ -2,7 +2,6 @@ import * as actionTypes from './actionTypes';
 import axios from '../../Utils/axios';
 import * as urls from '../../Config/urls';
 
-import * as urls from '../Events'
 export const addOperator = (formData) => {
     return async (dispatch) => {
         try {

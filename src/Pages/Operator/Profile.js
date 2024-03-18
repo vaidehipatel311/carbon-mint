@@ -71,7 +71,7 @@ export default function Profile() {
                                     anchorOrigin={{
                                         vertical: 'bottom',
                                         horizontal: 'right',
-                                    }}></Badge><Avatar className='avatar'><img src={avatar}></img></Avatar>
+                                    }}></Badge><Avatar className='avatar'><img src={avatar} alt="avatar"></img></Avatar>
                                 <Typography variant='p' className='name'>Kethavath Laxmanna</Typography>
                                 <Typography variant='p' className='id'>KFP/MT/01</Typography>
                                 <Grid container sx={{ mt: 3, textAlign: 'center' }}>
@@ -233,7 +233,7 @@ export default function Profile() {
                             <Grid xs={6}>
                                 <Link href='/operator/profile/landparcel' style={{ textDecoration: 'none' }}>
                                     <div className="grid-upper-profile">
-                                        <img src={Banner}></img>
+                                        <img src={Banner} alt="banner"></img>
                                     </div >
                                     <Item className='grid-lower-profile' sx={{ boxShadow: '0px 0px 12px 0px #0000001F' }}>
                                         <div>
@@ -269,7 +269,7 @@ export default function Profile() {
                                             <Grid container>
                                                 <Grid xs={12}>
                                                     <Item className='crops-operators'>
-                                                        <Avatar><img src={sourgham}></img></Avatar>
+                                                        <Avatar><img src={sourgham} alt="sourgham"></img></Avatar>
                                                         <div style={{ display: 'grid' }}>
                                                             <Typography variant='p'><b>Sourgham</b></Typography>
                                                             <Typography variant='p' className='text'>Corner Field</Typography>
@@ -280,7 +280,7 @@ export default function Profile() {
                                                 </Grid>
                                                 <Grid xs={12}>
                                                     <Item className='crops-operators'>
-                                                        <Avatar><img src={finger_millet}></img></Avatar>
+                                                        <Avatar><img src={finger_millet} alt="finger-millet"></img></Avatar>
                                                         <div style={{ display: 'grid' }}>
                                                             <Typography variant='p'><b>Finger Millet</b></Typography>
                                                             <Typography variant='p' className='text'>Lake Edge Field</Typography>
@@ -299,7 +299,7 @@ export default function Profile() {
                             <Grid xs={6}>
                                 <Link href='/operator/profile/landparcel' style={{ textDecoration: 'none' }}>
                                     <div className="grid-upper-profile">
-                                        <img src={Banner}></img>
+                                        <img src={Banner} alt="banner"></img>
                                     </div >
                                     <Item className='grid-lower-profile' sx={{ boxShadow: '0px 0px 12px 0px #0000001F' }}>
                                         <div>
@@ -335,7 +335,7 @@ export default function Profile() {
                                             <Grid container>
                                                 <Grid xs={12}>
                                                     <Item className='crops-operators'>
-                                                        <Avatar><img src={sourgham}></img></Avatar>
+                                                        <Avatar><img src={sourgham} alt="sourgham"></img></Avatar>
                                                         <div style={{ display: 'grid' }}>
                                                             <Typography variant='p'><b>Sourgham</b></Typography>
                                                             <Typography variant='p' className='text'>Corner Field</Typography>
@@ -346,7 +346,7 @@ export default function Profile() {
                                                 </Grid>
                                                 <Grid xs={12}>
                                                     <Item className='crops-operators'>
-                                                        <Avatar><img src={finger_millet}></img></Avatar>
+                                                        <Avatar><img src={finger_millet} alt="finger-millet"></img></Avatar>
                                                         <div style={{ display: 'grid' }}>
                                                             <Typography variant='p'><b>Finger Millet</b></Typography>
                                                             <Typography variant='p' className='text'>Lake Edge Field</Typography>

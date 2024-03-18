@@ -61,7 +61,7 @@ export default function crops() {
                         <Item sx={{ boxShadow: '0px 0px 12px 0px #0000001F', paddingBottom: 2 }}>
                             <div className='sourgham-details'>
 
-                                <img src={Banner_crops_2}></img>
+                                <img src={Banner_crops_2} alt="banner2"></img>
                                 <Typography variant='p' className='name'>Sourgham</Typography>
                                 <Typography variant='p' className='address'>Chennaiah Polam Corner Field</Typography>
                                 <Grid container sx={{ mt: 3, textAlign: 'center' }}>
@@ -121,7 +121,7 @@ export default function crops() {
                     <Grid xs={7.5}>
                         <Grid xs={12}>
                             <div sx={{ boxShadow: '0px 0px 12px 0px #0000001F', paddingBottom: 2, ml: 2 }}>
-                                <img src={field_area_map} style={{ width: '100%' }}></img>
+                                <img src={field_area_map} alt="field-area" style={{ width: '100%' }}></img>
                             </div>
                         </Grid>
                         <Grid xs={12}>
@@ -134,7 +134,7 @@ export default function crops() {
                                             <b><Typography variant='p'>Irrigation</Typography></b>
                                             <Typography variant='p'>Last updated on 24/04/2022, 4:30pm</Typography>
                                         </div>
-                                        <img src={irrigation}></img>
+                                        <img src={irrigation} alt="irrigation"></img>
                                     </Item>
                                 </Grid>
                             </Grid>

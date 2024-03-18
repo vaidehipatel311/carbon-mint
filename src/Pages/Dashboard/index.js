@@ -73,7 +73,7 @@ function DashBoard({ fetchOnboarding }) {
             <TableBody>
                 <TableRow sx={{ fontSize: '10px' }}>
                     <TableCell component="th" scope="row" sx={{ display: 'flex', marginTop: '2px', borderRight: '1px solid #d7d7d7' }}>
-                        <Avatar sx={{ background: 'none' }}><img src={corner_field} className='person-icon'></img></Avatar>
+                        <Avatar sx={{ background: 'none' }}><img src={corner_field} className='person-icon' alt="avatar"></img></Avatar>
                         <Typography variant='p' sx={{ marginTop: '10px' }}>{data.name}</Typography>
                     </TableCell>
                     <TableCell sx={{ borderRight: '1px solid #d7d7d7' }}>{data.type}</TableCell>
@@ -218,7 +218,7 @@ function DashBoard({ fetchOnboarding }) {
                             </select>
                             <Typography className='date' variant='p'>July, 2022</Typography>
                             <br></br>
-                            <img src={operator_chart} className='chart-img'></img>
+                            <img src={operator_chart} className='chart-img' alt="operator-chart"></img>
                             <div style={{ display: 'flex', marginLeft: '90px', fontSize: '12px', marginTop: '50px' }}>
                                 <li style={{ color: 'green' }}></li>Active-operators
                                 <li style={{ color: '#8CD867', marginLeft: '30px' }}></li>Events Activity
@@ -238,7 +238,7 @@ function DashBoard({ fetchOnboarding }) {
                                 <option>Maharashtra</option>
                             </select>
 
-                            <img src={event_chart} className='chart-img'></img>
+                            <img src={event_chart} className='chart-img' alt="event-chart"></img>
                             <div style={{ display: 'flex', marginLeft: '110px', fontSize: '12px', marginTop: '30px' }}>
                                 <li style={{ color: 'green' }}></li>Events
                                 <li style={{ color: '#FFC9B9', marginLeft: '30px' }}></li>Archive
@@ -267,7 +267,7 @@ function DashBoard({ fetchOnboarding }) {
                             </select>
                             <div style={{ display: 'flex', fontSize: '12px' }}>
                                 <Grid item xs={12}>
-                                    <img src={crops_chart} className='chart-img' style={{ marginTop: "80px", marginLeft: "30px" }}></img>
+                                    <img src={crops_chart} className='chart-img' alt="crops-chart" style={{ marginTop: "80px", marginLeft: "30px" }}></img>
                                 </Grid>
                                 <Grid item xs={12}>
                                     <div className='lists'>
@@ -340,7 +340,7 @@ function DashBoard({ fetchOnboarding }) {
                                 <option>Maharashtra</option>
                             </select><br />
 
-                            <img src={yield_chart} className='chart-img'></img>
+                            <img src={yield_chart} className='chart-img' alt="yield-chart"></img>
                         </div>
                     </Grid>
 
@@ -362,9 +362,9 @@ function DashBoard({ fetchOnboarding }) {
                                 <option>Australia</option>
                             </select>
                             <div style={{ display: 'flex', fontSize: '12px' }}>
-                                <img src={india} className='india-img'></img>
-                                <img src={india_dotted} className='india-dotted-img'></img>
-                                <img src={person_location} className='person-location-img'></img>
+                                <img src={india} className='india-img' alt="india"></img>
+                                <img src={india_dotted} className='india-dotted-img' alt="india"></img>
+                                <img src={person_location} className='person-location-img' alt="india" ></img>
                                 <div className='lists'>
                                     <li style={{ color: '#8CD867', marginTop: '50px', position: 'relative' }}>
                                         <p style={{ color: 'black', position: 'relative', display: 'inline' }}>Active</p></li>

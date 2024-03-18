@@ -7,8 +7,6 @@ import './style.css'
 import { Button, Avatar, Badge } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import WindowIcon from '@mui/icons-material/Window';
-import ListIcon from '@mui/icons-material/List';
 import Paper from '@mui/material/Paper';
 import GroupRoundedIcon from '@mui/icons-material/GroupRounded';
 import ellipse8 from '../../assets/LandOwners/Ellipse 8.png'
@@ -26,8 +24,6 @@ import * as daction from '../../Services/Onboarding/actions';
 import { connect } from 'react-redux';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import vector from '../../assets/LandOwners/Vector.png';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import Sidebar from '../../Components/Sidebar';
 import corner_field from '../../assets/LandOwners/Vector.png'
@@ -65,7 +61,7 @@ function Operator({ fetchOperator, fetchOnboarding }) {
                 <TableRow className='tr'>
                     <Link to='/operator/profile' style={{ textDecoration: "none", color: "black" }}>
                         <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7', display: "flex" }}>
-                            <Avatar sx={{ background: 'none' }}><img src={corner_field} className='photo'></img></Avatar><div style={{ fontWeight: "bold", marginLeft: "15px", marginTop: "10px" }}>{owners.name}</div>
+                            <Avatar sx={{ background: 'none' }}><img src={corner_field} className='photo' alt="corner-field"></img></Avatar><div style={{ fontWeight: "bold", marginLeft: "15px", marginTop: "10px" }}>{owners.name}</div>
                         </TableCell>
                     </Link>
 
@@ -85,7 +81,7 @@ function Operator({ fetchOperator, fetchOnboarding }) {
             <TableBody>
                 <TableRow className='tr'>
                     <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7', display: "flex" }}>
-                        <Avatar sx={{ background: 'none' }}><img src={corner_field} className='photo'></img></Avatar>
+                        <Avatar sx={{ background: 'none' }}><img src={corner_field} className='photo' alt="corner-field"></img></Avatar>
                         <div style={{ fontWeight: "bold", marginLeft: "15px", marginTop: "10px" }}>{owners.name}</div>
                     </TableCell>
                     <TableCell align='center' sx={{ color: "rgb(62, 205, 62)", borderRight: '1px solid #d7d7d7' }}>{owners.ownerId}</TableCell>

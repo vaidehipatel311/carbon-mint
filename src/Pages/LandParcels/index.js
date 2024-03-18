@@ -56,7 +56,7 @@ function LandParcels({ fetchLandParcels }) {
             <TableBody>
                 <TableRow className='tr'>
                     <TableCell align='center'>
-                        <div style={{ display: "flex", borderRight: '1px solid #d7d7d7' }}><Avatar sx={{ background: 'none' }}><img src={corner_field} className='photo'></img></Avatar><div style={{ fontWeight: "bold", marginLeft: "15px", marginTop: "10px" }}>{owners.name}</div></div>
+                        <div style={{ display: "flex", borderRight: '1px solid #d7d7d7' }}><Avatar sx={{ background: 'none' }}><img src={corner_field} className='photo' alt="avatar"></img></Avatar><div style={{ fontWeight: "bold", marginLeft: "15px", marginTop: "10px" }}>{owners.name}</div></div>
                     </TableCell>
                     <TableCell align='center' sx={{ color: "rgb(62, 205, 62)", borderRight: '1px solid #d7d7d7' }}>{owners.SyNo}</TableCell>
                     <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}>{owners.acres}</TableCell>
@@ -73,7 +73,7 @@ function LandParcels({ fetchLandParcels }) {
         return landParcels.map((owners, index) => (
             <TableBody>
                 <TableRow className='tr'>
-                    <TableCell align='center'><div style={{ display: "flex", borderRight: '1px solid #d7d7d7' }}><Avatar sx={{ background: 'none' }}><img src={corner_field} className='photo'></img></Avatar><div style={{ fontWeight: "bold", marginLeft: "15px", marginTop: "10px" }}>{owners.name}</div></div></TableCell>
+                    <TableCell align='center'><div style={{ display: "flex", borderRight: '1px solid #d7d7d7' }}><Avatar sx={{ background: 'none' }}><img src={corner_field} className='photo' alt="avatar"></img></Avatar><div style={{ fontWeight: "bold", marginLeft: "15px", marginTop: "10px" }}>{owners.name}</div></div></TableCell>
                     <TableCell align='center' sx={{ color: "rgb(62, 205, 62)", borderRight: '1px solid #d7d7d7' }}>{owners.SyNo}</TableCell>
                     <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}>{owners.acres}</TableCell>
                     <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}>{owners.contactno}</TableCell>

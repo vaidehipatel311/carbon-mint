@@ -379,9 +379,7 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                     <Grid>
                                         <Breadcrumbs
                                             separator={<NavigateNextIcon fontSize="small" />}
-                                            aria-label="breadcrumb"
-
-                                        >
+                                            aria-label="breadcrumb">
                                             <Link underline='hover' color='inherit' href="/operator/profile">
                                                 Kethavath Laxmanna
                                             </Link>
@@ -394,8 +392,6 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                             <Link underline='hover' color='inherit' href="/events/2">
                                                 Events
                                             </Link>
-
-
                                         </Breadcrumbs>
                                     </Grid>
 
@@ -418,10 +414,10 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                 <Typography variant='p' fontWeight='bold' sx={{ marginRight: "640px" }}>Event images</Typography>
                                 <div style={{ marginTop: '10px', display: "flex", gap: "10px" }}>
 
-                                    <img src={img1}></img>
-                                    <img src={img2}></img>
-                                    <img src={img3}></img>
-                                    <img src={img4}></img>
+                                    <img src={img1} alt="img"></img>
+                                    <img src={img2} alt="img"></img>
+                                    <img src={img3} alt="img"></img>
+                                    <img src={img4} alt="img"></img>
                                 </div>
 
                             </Grid>

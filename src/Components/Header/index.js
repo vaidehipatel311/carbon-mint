@@ -65,7 +65,7 @@ export default function Header() {
                         <Grid xs={12}>
                             <div className='notify-div'>
                                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                                    <Avatar sx={{ background: 'none' }}><img src={corner_field} className='photo'></img></Avatar>
+                                    <Avatar sx={{ background: 'none' }}><img src={corner_field} className='photo' alt="img"></img></Avatar>
                                     <div>
                                         <Typography variant='body1' className='title'>Corner field: Sorghum photos</Typography>
                                         <Typography variant='body2' className='text'>04 Jun, 2022 | 04:00 PM</Typography>
@@ -79,7 +79,7 @@ export default function Header() {
                         <Grid xs={12}>
                             <div className='notify-div'>
                                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                                    <Avatar sx={{ background: 'none' }}><img src={lake_edge} className='photo'></img></Avatar>
+                                    <Avatar sx={{ background: 'none' }}><img src={lake_edge} className='photo' alt="img"></img></Avatar>
                                     <div>
                                         <Typography variant='body1' className='title'>Lake edge field: Finger Millet photos</Typography>
                                         <Typography variant='body2' className='text'>04 Jun, 2022 | 04:00 PM</Typography>
@@ -92,7 +92,7 @@ export default function Header() {
                     <Grid xs={12}>
                         <div className='notify-div'>
                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                                <Avatar sx={{ background: 'none' }}><img src={operator_approved} className='photo'></img></Avatar>
+                                <Avatar sx={{ background: 'none' }}><img src={operator_approved} className='photo' alt="img"></img></Avatar>
                                 <div>
                                     <Typography variant='body1' className='title'>Operator onboard approved</Typography>
                                     <Typography variant='body2' className='text'>04 Jun, 2022 | 04:00 PM</Typography>
@@ -104,7 +104,7 @@ export default function Header() {
                     <Grid xs={12}>
                         <div className='notify-div'>
                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                                <Avatar sx={{ background: 'none' }}><img src={desha} className='photo'></img></Avatar>
+                                <Avatar sx={{ background: 'none' }}><img src={desha} className='photo' alt="img"></img></Avatar>
                                 <div>
                                     <Typography variant='body1' className='title'>Desha Thirupataiah onboarding</Typography>
                                     <Typography variant='body2' className='text'>04 Jun, 2022 | 04:00 PM</Typography>
@@ -116,7 +116,7 @@ export default function Header() {
                     <Grid xs={12}>
                         <div className='notify-div'>
                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                                <Avatar sx={{ background: 'none' }}><img src={operator_processing} className='photo'></img></Avatar>
+                                <Avatar sx={{ background: 'none' }}><img src={operator_processing} alt="img" className='photo'></img></Avatar>
                                 <div style={{ justifyContent: 'center' }}>
                                     <Typography variant='body1' className='title'>Operator onboarding processing</Typography>
                                     <Typography variant='body2' className='text'>04 Jun, 2022 | 04:00 PM</Typography>
@@ -140,7 +140,7 @@ export default function Header() {
 
             <Button sx={{ color: 'gray', ml: 32 }} onClick={closeProfileDrawer}><CloseIcon /></Button>
             <div style={{ textAlign: 'center', marginBottom: '20px' }}>
-                <img className="contact-img" src={person}></img>
+                <img className="contact-img" src={person} alt="img"></img>
                 <div className='user-in-drawer'>
                     <Typography className='user-name' variant='p'>Subbarayudu KV</Typography><br />
                     <Typography className='agent' variant='p'>Agent</Typography>
@@ -207,7 +207,7 @@ export default function Header() {
                         <div className='right-icons'>
                             <div className='notification' onClick={toggleNotificationDrawer}>
                                 {notificationDrawerOpen ?
-                                    (<Button sx={{ color: 'green', backgroundColor: 'green', color: "white", borderRadius: '80px', height: '40px' }}>
+                                    (<Button sx={{ backgroundColor: 'green', color: "white", borderRadius: '80px', height: '40px' }}>
                                         <NotificationsNoneIcon className='notification-icon' />
                                     </Button>)
                                     : (<Button sx={{ color: 'black', borderRadius: '50px', height: '40px' }}>

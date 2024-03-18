@@ -56,7 +56,7 @@ export default function landparcel() {
                     <Grid xs={4.5} sx={{ mb: 5 }}>
                         <Item sx={{ boxShadow: '0px 0px 12px 0px #0000001F', paddingBottom: 2 }}>
                             <div className='chennaiah-polam-details'>
-                                <img src={Banner}></img>
+                                <img src={Banner} alt="banner"></img>
                                 <Typography variant='p' className='name'>Chennaiah Polam</Typography>
                                 <Typography variant='p' className='address'>H.no: 54b/TS, Megya Thanda, Rangareddy, Hyderabad,  Telangana - 500008</Typography>
                                 <Grid container sx={{ mt: 3, textAlign: 'center' }}>
@@ -136,7 +136,7 @@ export default function landparcel() {
                     <Grid xs={7.5}>
                         <Grid xs={12}>
                             <div sx={{ boxShadow: '0px 0px 12px 0px #0000001F', paddingBottom: 2, ml: 2 }}>
-                                <img src={maps} style={{ width: '100%' }}></img>
+                                <img src={maps} style={{ width: '100%' }} alt="maps"></img>
 
                             </div>
                         </Grid>
@@ -149,7 +149,7 @@ export default function landparcel() {
                                 <Grid xs={6}>
                                     <Link href='/operator/profile/landparcel/crops' style={{ textDecoration: 'none' }}>
                                         <div className="crops-grid-upper">
-                                            <img src={Banner_crops_2}></img>
+                                            <img src={Banner_crops_2} alt="banner2"></img>
 
                                         </div >
                                         <Item className='crops-grid-lower' sx={{ boxShadow: '0px 0px 12px 0px #0000001F' }}>
@@ -187,7 +187,7 @@ export default function landparcel() {
                                 <Grid xs={6}>
                                     <Link href='/operator/profile/landparcel/crops' style={{ textDecoration: 'none' }}>
                                         <div className="crops-grid-upper">
-                                            <img src={Banner_crops_2}></img>
+                                            <img src={Banner_crops_2} alt="banner2"></img>
 
                                         </div >
                                         <Item className='crops-grid-lower' sx={{ boxShadow: '0px 0px 12px 0px #0000001F' }}>

@@ -14,7 +14,6 @@ import OperatorCrops from './Pages/Operator/crops';
 function App() {
   return (
     <div className="App">
-      <h1></h1>
       <Router>
         <Routes>
           <Route path='/' element={<Login />} />

@@ -6,7 +6,7 @@ import Header from '../../Components/Header';
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid';
 import './events.css'
-import { Button, Menu, MenuItem, Badge, TextField, Breadcrumbs } from '@mui/material';
+import { Button, Menu, MenuItem, Badge, TextField, Breadcrumbs, Alert, Snackbar } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import Paper from '@mui/material/Paper';
@@ -35,6 +35,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { useNavigate } from 'react-router-dom';
+import { useFormik } from 'formik';
 import { addEvent, fetchAddedEvents, fetchEvents } from '../../Services/Events/actions';
 
 function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
@@ -51,7 +52,8 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
     const [filterValue, setFiltervalue] = useState('');
     const [showFilterValue, setshowFilterValue] = useState(false);
     const [isDraft, setisDraft] = useState(false);
-    const [draftdata, setDraftData] = useState([]);
+    const [draftdata, setDraftData] = useState({});
+    const [norecord, setnorecord] = useState(false);
 
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -72,55 +74,70 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
         fetchAddedEvents()
             .then((data) => {
                 setaddedEvents(data);
+                const filteredEvent = addedevents.find(p => p.id === parseInt(2, 10))
+                setDraftData(filteredEvent);
+                console.log(draftdata)
             })
             .catch(err => console.log(err));
+    }, [draftdata]);
 
-        const filteredEvent = addedevents.find(p => p.id === parseInt(1, 10))
-        setDraftData(filteredEvent);
-        console.log(draftdata)
-
-    }, []);
-
-    const [formData, setFormData] = useState({
-        seedlings: '',
-        nursery: '',
-        nursery_bed: '',
-        house: '',
-        soil_treatment: '',
-        chemicals: '',
-        quantity: '',
-        seed_treatment: '',
-        variety: '',
-        crop_duration: '',
-        seed_rate: '',
-        sowing_method: '',
-        irrigation_method: '',
-        intercultural_operations: '',
-        recommended_competent: '',
-        evidence: []
+    const formik = useFormik({
+        initialValues: {
+            seedlings: '',
+            nursery: '',
+            nursery_bed: '',
+            house: '',
+            soil_treatment: '',
+            chemicals: '',
+            quantity: '',
+            seed_treatment: '',
+            variety: '',
+            crop_duration: '',
+            seed_rate: '',
+            sowing_method: '',
+            irrigation_method: '',
+            intercultural_operations: '',
+            recommended_competent: '',
+            scarcification: '',
+            soaking_hot_water: '',
+            soaking_chemicals: '',
+            soaking_cool_water: '',
+            wetting_drying: '',
+            others: '',
+            evidence: []
+        },
+        onSubmit: (values) => {
+            if (eventGroup !== "Seed & Seedlings" || eventName !== 'Seed') {
+                alert('Please select the field!')
+            }
+            else {
+                addEvent(values)
+                navigate('/dashboard', { state: { showAlert: true } });
+            }
+        }
     });
 
-    const handleChange = (event, key) => {
-        setFormData({
-            ...formData,
-            [key]: event.target.value
-        });
-    };
+    // const handleChange = (event, key) => {
+    //     setFormData({
+    //         ...formData,
+    //         [key]: event.target.value
+    //     });
+    // };
 
     // const handleAdd = () => {
     //     addEvent(formData)
     // };
 
-    const handleAdd = () => {
-        if (eventGroup !== "Seed & Seedlings" || eventName !== 'Seed') {
-            alert('Please select the field!')
-        }
-        else {
-            addEvent(formData)
-            navigate('/dashboard', { state: { showAlert: true } });
-        }
+    // const handleAdd = () => {
+    //     if (eventGroup !== "Seed & Seedlings" || eventName !== 'Seed') {
+    //         alert('Please select the field!')
+    //     }
+    //     else {
+    //         addEvent(formData)
+    //         navigate('/dashboard', { state: { showAlert: true } });
+    //     }
 
-    };
+    // };
 
     const handleFileChange = (event) => {
         const files = event.target.files;
@@ -132,17 +149,30 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
         setSelectedFiles(updatedFiles);
     };
     const handleEventForm = () => {
+        setnorecord(false);
         setformVisible(true);
         setsubmitbutton(true);
     };
     const handleDraftForm = () => {
-        setisDraft(true);
-        setEventGroup("Seed & Seedlings");
-        setEventName("Seed");
-        setformVisible(true);
-        setsubmitbutton(true);
-
+        if (addedevents.length <= 1) {
+            setnorecord(true);
+        }
+        else {
+            setisDraft(true);
+            setEventGroup("Seed & Seedlings");
+            setEventName("Seed");
+            setformVisible(true);
+            setsubmitbutton(true);
+        }
     };
+    const handleDiscard = () => {
+        setformVisible(false);
+        setnorecord(false);
+        setsubmitbutton(false);
+        setisDraft(false);
+        setEventGroup("");
+        setEventName("");
+    }
 
 
     const VisuallyHiddenInput = styled('input')({
@@ -157,7 +187,22 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
         // width: 1,
     });
 
+    const generateDraftImages = () => {
+        return draftdata.evidence.map((image, index) => (
+            <>
+                <img
+                    src={image}
+                    alt={image}
+                    style={{ width: '100px', height: '100px', marginRight: '40px', marginLeft: "40px" }}
+                />
 
+                {/* <img
+                    src={img2}
+                    alt={img2}
+                    style={{ width: '100px', height: '100px', marginRight: '40px', }}
+                /> */}
+            </>))
+    }
 
     const generateGridItems = () => {
 
@@ -371,6 +416,11 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                     </Box >
                 </>)
                 :
+
+
+
+
+
                 (<>
                     <Box sx={{ paddingLeft: "290px" }}>
                         <Grid container>
@@ -428,6 +478,12 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                 </div>
                             </Grid>
                         </Grid>
+
+                        {norecord ? (<>
+                            <Snackbar autoHideDuration={60} open={norecord} >
+                                <Alert sx={{ ml: 90, mt: -60 }} severity='error'>
+                                    No record
+                                </Alert></Snackbar></>) : ("")}
                         {formVisible ?
                             (
                                 <div className='event-form'>
@@ -474,11 +530,11 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                                         type='text'
                                                         select
                                                         fullWidth
-                                                        // value={formData.seedlings}
-                                                        onChange={(e) => handleChange(e, 'seedlings')}
+                                                        name='seedlings'
+                                                        onChange={formik.handleChange}
                                                         label='Source of Seedlings'
                                                         sx={{ mt: "15px" }}
-                                                        defaultValue={isDraft ? "On farm nursery" : ""}>
+                                                        defaultValue={isDraft ? draftdata.seedlings : ""}>
                                                         <MenuItem value='On farm nursery' >On farm nursery</MenuItem>
                                                     </TextField>
 
@@ -488,9 +544,8 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                                         select
                                                         fullWidth
                                                         label='Type of Nursery'
-                                                        // value={formData.nursery}
-                                                        onChange={(e) => handleChange(e, 'nursery')}
-                                                        defaultValue={isDraft ? "Wet nursery" : ""}>
+                                                        name='nursery'
+                                                        onChange={formik.handleChange} defaultValue={isDraft ? draftdata.nursery : ""}>
                                                         <MenuItem value='Wet nursery'>Wet nursery</MenuItem>
                                                     </TextField>
 
@@ -500,9 +555,8 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                                         select
                                                         fullWidth
                                                         label='Type of Nursery bed'
-                                                        // value={formData.nursery_bed}
-                                                        onChange={(e) => handleChange(e, 'nursery_bed')}
-                                                        defaultValue={isDraft ? "Raised bed" : ""} >
+                                                        name='nursery_bed'
+                                                        onChange={formik.handleChange} defaultValue={isDraft ? draftdata.nursery_bed : ""} >
                                                         <MenuItem value='Raised bed'>Raised bed</MenuItem>
                                                     </TextField>
 
@@ -512,9 +566,8 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                                         select
                                                         fullWidth
                                                         label='Type of in house (Framed structures)nursery'
-                                                        // value={formData.house}
-                                                        onChange={(e) => handleChange(e, 'house')}
-                                                        defaultValue={isDraft ? "Open nursery" : ""}>
+                                                        name='house'
+                                                        onChange={formik.handleChange} defaultValue={isDraft ? draftdata.house : ""}>
                                                         <MenuItem value='Open nursery'>Open nursery</MenuItem>
                                                     </TextField>
 
@@ -524,9 +577,8 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                                         select
                                                         fullWidth
                                                         label='Soil Treatment methods'
-                                                        // value={formData.soil_treatment}
-                                                        onChange={(e) => handleChange(e, 'soil_treatment')}
-                                                        defaultValue={isDraft ? "Soil treatment by chemicals" : ""}>
+                                                        name='soil_treatment'
+                                                        onChange={formik.handleChange} defaultValue={isDraft ? draftdata.soil_treatment : ""}>
                                                         <MenuItem value='Soil treatment by chemicals'>Soil treatment by chemicals</MenuItem>
                                                     </TextField>
 
@@ -535,9 +587,8 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                                         type='text'
                                                         select
                                                         label='Chemicals applied'
-                                                        // value={formData.chemicals}
-                                                        onChange={(e) => handleChange(e, 'chemicals')}
-                                                        defaultValue={isDraft ? "Chlorpyriphos" : ""}>
+                                                        name='chemicals'
+                                                        onChange={formik.handleChange} defaultValue={isDraft ? draftdata.chemicals : ""}>
                                                         <MenuItem value='Chlorpyriphos'>Chlorpyriphos</MenuItem>
                                                     </TextField>
 
@@ -546,9 +597,8 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                                         type='text'
                                                         select
                                                         label='Quantity applied (gm or ml)'
-                                                        // value={formData.quantity}
-                                                        onChange={(e) => handleChange(e, 'quantity')}
-                                                        defaultValue={isDraft ? "300" : ""}>
+                                                        name='quantity'
+                                                        onChange={formik.handleChange} defaultValue={isDraft ? draftdata.quantity : ""}>
                                                         <MenuItem value='200'>200</MenuItem>
                                                         <MenuItem value='300'>300</MenuItem>
                                                         <MenuItem value='400'>400</MenuItem>
@@ -560,18 +610,68 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                                     <Grid container>
                                                         <Grid xs={6}>
                                                             <FormGroup>
-                                                                <FormControlLabel control={<Checkbox />} label="Scarification" />
-                                                                <FormControlLabel control={<Checkbox color='success' defaultChecked />} label="Soaking in hot water" />
-                                                                <FormControlLabel control={<Checkbox color='success' defaultChecked />} label="Soaking in chemicals" />
+                                                                <FormControlLabel
+                                                                    control={<Checkbox
+                                                                        onChange={(e) => {
+                                                                            formik.setFieldValue('scarcification', e.target.checked);
+                                                                        }}
+                                                                        defaultChecked={isDraft ? draftdata.scarcification : ''}
+                                                                    />}
+                                                                    label="Scarification"
+                                                                />
+                                                                <FormControlLabel
+                                                                    control={<Checkbox
+                                                                        color='success'
+                                                                        onChange={(e) => {
+                                                                            formik.setFieldValue('soaking_hot_water', e.target.checked);
+                                                                        }}
+                                                                        defaultChecked={isDraft ? draftdata.soaking_hot_water : ''}
+                                                                    />}
+                                                                    label="Soaking in hot water"
+                                                                />
+                                                                <FormControlLabel
+                                                                    control={<Checkbox
+                                                                        color='success'
+                                                                        onChange={(e) => {
+                                                                            formik.setFieldValue('soaking_chemicals', e.target.checked);
+                                                                        }}
+                                                                        defaultChecked={isDraft ? draftdata.soaking_chemicals : ''}
+                                                                    />}
+                                                                    label="Soaking in chemicals"
+                                                                />
                                                             </FormGroup>
                                                         </Grid>
                                                         <Grid xs={6}>
                                                             <FormGroup>
-                                                                <FormControlLabel control={<Checkbox color='success' defaultChecked />} label="Soaking in cool water" />
-                                                                <FormControlLabel control={<Checkbox />} label="wetting and drying " />
-                                                                <FormControlLabel control={<Checkbox />} label="Others" />
+                                                                <FormControlLabel
+                                                                    control={<Checkbox
+                                                                        color='success'
+                                                                        onChange={(e) => {
+                                                                            formik.setFieldValue('soaking_cool_water', e.target.checked);
+                                                                        }}
+                                                                        defaultChecked={isDraft ? draftdata.soaking_cool_water : ''}
+                                                                    />}
+                                                                    label="Soaking in cool water"
+                                                                />
+                                                                <FormControlLabel
+                                                                    control={<Checkbox
+                                                                        onChange={(e) => {
+                                                                            formik.setFieldValue('wetting_drying', e.target.checked);
+                                                                        }}
+                                                                        defaultChecked={isDraft ? draftdata.wetting_drying : ''}
+                                                                    />}
+                                                                    label="Wetting and drying"
+                                                                />
+                                                                <FormControlLabel
+                                                                    control={<Checkbox
+                                                                        onChange={(e) => {
+                                                                            formik.setFieldValue('others', e.target.checked);
+                                                                        }}
+                                                                        defaultChecked={isDraft ? draftdata.others : ''}
+                                                                    />}
+                                                                    label="Others"
+                                                                />
                                                             </FormGroup>
-
                                                         </Grid>
                                                     </Grid>
 
@@ -579,34 +679,30 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                                         size='small'
                                                         type='text'
                                                         label='Variety/Hybrid name'
-                                                        // value={formData.variety}
-                                                        onChange={(e) => handleChange(e, 'variety')}
-                                                        defaultValue={isDraft ? "Hybrid" : ""} />
+                                                        name='variety'
+                                                        onChange={formik.handleChange} defaultValue={isDraft ? draftdata.variety : ""} />
 
                                                     <TextField
                                                         size='small'
                                                         type='number'
                                                         label='Crop Duration (Days)'
-                                                        // value={formData.crop_duration}
-                                                        onChange={(e) => handleChange(e, 'crop_duration')}
-                                                        defaultValue={isDraft ? "90" : ""} />
+                                                        name='crop_duration'
+                                                        onChange={formik.handleChange} defaultValue={isDraft ? draftdata.crop_duration : ""} />
 
                                                     <TextField
                                                         size='small'
                                                         type='number'
                                                         label='Seed rate (Kg/cent)'
-                                                        // value={formData.seed_rate}
-                                                        onChange={(e) => handleChange(e, 'seed_rate')}
-                                                        defaultValue={isDraft ? "15" : ""} />
+                                                        name='seed_rate'
+                                                        onChange={formik.handleChange} defaultValue={isDraft ? draftdata.seed_rate : ""} />
 
                                                     <TextField
                                                         size='small'
                                                         select
                                                         type='text'
                                                         label='Method of sowing'
-                                                        // value={formData.sowing_method}
-                                                        onChange={(e) => handleChange(e, 'sowing_method')}
-                                                        defaultValue={isDraft ? "Sowing in pro-trays" : ""} >
+                                                        name='sowing_method'
+                                                        onChange={formik.handleChange} defaultValue={isDraft ? draftdata.sowing_method : ""} >
                                                         <MenuItem value='Sowing in pro-trays'>Sowing in pro-trays</MenuItem>
                                                     </TextField>
 
@@ -614,18 +710,16 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                                         size='small'
                                                         type='text'
                                                         label='Method of irrigation'
-                                                        // value={formData.irrigation_method}
-                                                        onChange={(e) => handleChange(e, 'irrigation_method')}
-                                                        defaultValue={isDraft ? "Flooding" : ""} />
+                                                        name='irrigation_method'
+                                                        onChange={formik.handleChange} defaultValue={isDraft ? draftdata.irrigation_method : ""} />
 
                                                     <TextField
                                                         size='small'
                                                         type='text'
                                                         select
                                                         label='Intercultural operations in nursery'
-                                                        // value={formData.intercultural_operations}
-                                                        onChange={(e) => handleChange(e, 'intercultural_operations')}
-                                                        defaultValue={isDraft ? "Gap filling" : ""}>
+                                                        name='intercultural_operations'
+                                                        onChange={formik.handleChange} defaultValue={isDraft ? draftdata.intercultural_operations : ""}>
                                                         <MenuItem value='Gap filling'>Gap filling</MenuItem>
                                                     </TextField>
 
@@ -633,9 +727,8 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                                         size='small'
                                                         type='text'
                                                         label='Recommended compitent authority'
-                                                        // value={formData.recommended_competent}
-                                                        onChange={(e) => handleChange(e, 'recommended_competent')}
-                                                        defaultValue={isDraft ? "Chlorpyriphos" : ""}
+                                                        name='recommended_competent'
+                                                        onChange={formik.handleChange} defaultValue={isDraft ? draftdata.recommended_competent : ""}
                                                     />
 
 
@@ -655,9 +748,8 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                                         startIcon={<CloudUploadIcon />}
                                                         size="small"
                                                         sx={{ width: "150px", marginBottom: "10px", backgroundColor: '#8CD867', color: "black", border: "2px solid #2B9348", marginLeft: "40px" }}
-                                                        value={formData.evidence}
-                                                        onChange={(e) => handleChange(e, 'evidence')}
-                                                    >
+                                                        name="evidence"
+                                                        onChange={formik.handleChange}>
                                                         Upload file
                                                         <VisuallyHiddenInput type="file" multiple onChange={handleFileChange} />
                                                     </Button>
@@ -678,7 +770,10 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                                         ))}
 
                                                         {isDraft ? (<>
-                                                            <img
+
+                                                            {generateDraftImages()}
+
+                                                            {/* <img
                                                                 src={img1}
                                                                 alt={img1}
                                                                 style={{ width: '100px', height: '100px', marginRight: '40px', marginLeft: "40px" }}
@@ -688,7 +783,7 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                                                 src={img2}
                                                                 alt={img2}
                                                                 style={{ width: '100px', height: '100px', marginRight: '40px', }}
-                                                            />
+                                                            /> */}
 
                                                         </>) : (<></>)}
                                                     </Grid>
@@ -705,14 +800,14 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                         }
                         <div style={{ position: "relative", marginTop: formVisible ? "0px" : "330px", marginLeft: !formVisible ? "740px" : "855px", marginBottom: "20px" }}>
 
-                            <Button variant='outlined' className='three-buttons' sx={{ mr: 1, color: "#2B9348", border: "2px solid #2B9348" }} onClick={() => { setformVisible(false); setsubmitbutton(false); setisDraft(false); setEventGroup(""); setEventName("") }}>Discard</Button>
+                            <Button variant='outlined' className='three-buttons' sx={{ mr: 1, color: "#2B9348", border: "2px solid #2B9348" }} onClick={() => handleDiscard()}>Discard</Button>
 
                             <Button variant='contained' className='three-buttons' sx={{ mr: 1, backgroundColor: '#8CD867', color: "black", border: "2px solid #2B9348" }} onClick={() => handleDraftForm()}>Add to Draft</Button>
 
                             <Button variant='contained' className='three-buttons' sx={{ backgroundColor: '#8CD867', color: "black", border: "2px solid #2B9348", display: submitbutton ? 'none' : "", }}
                                 onClick={() => handleEventForm()}>Create a new event</Button>
 
-                            {submitbutton ? (<><Button variant='contained' className='three-buttons' sx={{ backgroundColor: '#8CD867', color: "black", border: "2px solid #2B9348", display: !formVisible ? "none" : "" }} onClick={handleAdd}>Submit</Button></>) : (<></>)}
+                            {submitbutton ? (<><Button variant='contained' className='three-buttons' sx={{ backgroundColor: '#8CD867', color: "black", border: "2px solid #2B9348", display: !formVisible ? "none" : "" }} onClick={formik.handleSubmit}>Submit</Button></>) : (<></>)}
                         </div>
                     </Box>
                 </>)
@@ -732,7 +827,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
 
     fetchEvents: () => fetchEvents(),
-    addEvent: (formData) => addEvent(formData),
+    addEvent: (formik) => addEvent(formik),
     fetchAddedEvents: () => fetchAddedEvents(),
 }
 

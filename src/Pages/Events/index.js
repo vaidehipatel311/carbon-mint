@@ -104,7 +104,7 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
             soaking_cool_water: '',
             wetting_drying: '',
             others: '',
-            evidence: []
+            evidence: ""
         },
         onSubmit: (values) => {
             if (eventGroup !== "Seed & Seedlings" || eventName !== 'Seed') {
@@ -139,11 +139,30 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
 
     // };
 
+    // const handleFileChange = (event) => {
+    //     const files = event.target.files;
+    //     setSelectedFiles([...files]);
+    //     console.log(selectedFiles.path);
+    // };
+
     const handleFileChange = (event) => {
         const files = event.target.files;
-        setSelectedFiles([...files]);
-        console.log(selectedFiles.path);
+        const fileArray = [];
+        Array.from(files).forEach(file => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onloadend = () => {
+                const base64data = reader.result;
+                fileArray.push(base64data);
+                if (fileArray.length === files.length) {
+                    setSelectedFiles(prevFiles => [...prevFiles, ...fileArray]);
+                    formik.setFieldValue('evidence', [...selectedFiles, ...fileArray]);
+                }
+            };
+        });
     };
+
+
     const handleDeleteFile = (index) => {
         const updatedFiles = selectedFiles.filter((_, i) => i !== index);
         setSelectedFiles(updatedFiles);
@@ -186,23 +205,6 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
         whiteSpace: 'nowrap',
         // width: 1,
     });
-
-    const generateDraftImages = () => {
-        return draftdata.evidence.map((image, index) => (
-            <>
-                <img
-                    src={image}
-                    alt={image}
-                    style={{ width: '100px', height: '100px', marginRight: '40px', marginLeft: "40px" }}
-                />
-
-                {/* <img
-                    src={img2}
-                    alt={img2}
-                    style={{ width: '100px', height: '100px', marginRight: '40px', }}
-                /> */}
-            </>))
-    }
 
     const generateGridItems = () => {
 
@@ -748,19 +750,19 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                                         startIcon={<CloudUploadIcon />}
                                                         size="small"
                                                         sx={{ width: "150px", marginBottom: "10px", backgroundColor: '#8CD867', color: "black", border: "2px solid #2B9348", marginLeft: "40px" }}
-                                                        name="evidence"
-                                                        onChange={formik.handleChange}>
+                                                    >
                                                         Upload file
-                                                        <VisuallyHiddenInput type="file" multiple onChange={handleFileChange} />
+                                                        <VisuallyHiddenInput type="file" multiple onChange={handleFileChange} name="evidence"
+                                                        />
                                                     </Button>
 
                                                     <Typography sx={{ marginLeft: "20px" }} display={isDraft ? "none" : ""}> {selectedFiles.length} Files selected </Typography>
-                                                    <Grid xs={10} >
+                                                    <Grid xs={12} >
                                                         {selectedFiles.map((file, index) => (
                                                             <>
                                                                 <img
                                                                     key={index}
-                                                                    src={URL.createObjectURL(file)}
+                                                                    src={file}
                                                                     alt={`Preview ${index}`}
                                                                     style={{ width: '100px', height: '100px', marginRight: '40px', marginLeft: "40px" }}
                                                                 />
@@ -769,23 +771,26 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
 
                                                         ))}
 
-                                                        {isDraft ? (<>
+                                                        {isDraft && draftdata && draftdata.evidence && draftdata.evidence.length > 0 && (
+                                                            <>
+                                                                {(() => {
+                                                                    const imageElements = [];
+                                                                    for (let index = 0; index < draftdata.evidence.length; index++) {
+                                                                        const imagePath = draftdata.evidence[index];
+                                                                        const imageElement = (
+                                                                            <>
+                                                                                <img
+                                                                                    src={imagePath}
+                                                                                    alt={`Draft Image ${index}`}
+                                                                                    style={{ width: '100px', height: '100px', marginRight: '40px', marginLeft: "40px" }}
+                                                                                /></>
+                                                                        );
+                                                                        imageElements.push(imageElement);
+                                                                    }
+                                                                    return imageElements;
+                                                                })()}
 
-                                                            {generateDraftImages()}
-
-                                                            {/* <img
-                                                                src={img1}
-                                                                alt={img1}
-                                                                style={{ width: '100px', height: '100px', marginRight: '40px', marginLeft: "40px" }}
-                                                            />
-
-                                                            <img
-                                                                src={img2}
-                                                                alt={img2}
-                                                                style={{ width: '100px', height: '100px', marginRight: '40px', }}
-                                                            /> */}
-
-                                                        </>) : (<></>)}
+                                                            </>)}
                                                     </Grid>
                                                 </Grid>
                                             </Grid>

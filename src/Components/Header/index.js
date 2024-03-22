@@ -45,6 +45,10 @@ export default function Header() {
     const closeProfileDrawer = () => {
         setProfileDrawerOpen(false);
     };
+    window.history.forward()
+    const handleLogout = () => {
+        window.history.forward()
+    }
 
     const notificationDrawer = (
         <Box
@@ -188,7 +192,7 @@ export default function Header() {
                             <Typography variant='p' sx={{ fontWeight: 'bold', fontSize: '15px' }}>Logout</Typography><br />
                             <Typography variant='p'>847064392663</Typography>
                         </div>
-                        <ArrowForwardIosIcon fontSize="small" sx={{ ml: 15 }} />
+                        <ArrowForwardIosIcon fontSize="small" sx={{ ml: 15 }} onClick={handleLogout} />
                     </div>
                 </Link>
             </div>

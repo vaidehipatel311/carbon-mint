@@ -60,7 +60,7 @@ export default function Header() {
                     <Button sx={{ color: 'gray', ml: 22 }} onClick={closeNotificationDrawer}><CloseIcon /></Button>
                 </div>
                 <br></br>
-                <Grid container spacing={2}>
+                {/* <Grid container spacing={2}>
                     <Link to='/events/2' style={{ textDecoration: "none" }}>
                         <Grid xs={12}>
                             <div className='notify-div'>
@@ -125,7 +125,7 @@ export default function Header() {
                             </div>
                         </div>
                     </Grid>
-                </Grid>
+                </Grid> */}
             </div>
         </Box>
     );

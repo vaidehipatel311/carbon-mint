@@ -184,7 +184,7 @@ export default function landparcel() {
                                     </Link>
                                 </Grid>
 
-                                <Grid xs={6}>
+                                {/* <Grid xs={6}>
                                     <Link href='/operator/profile/landparcel/crops' style={{ textDecoration: 'none' }}>
                                         <div className="crops-grid-upper">
                                             <img src={Banner_crops_2} alt="banner2"></img>
@@ -221,7 +221,7 @@ export default function landparcel() {
 
                                         </Item>
                                     </Link>
-                                </Grid>
+                                </Grid> */}
                             </Grid>
                         </Grid>
                     </Grid>

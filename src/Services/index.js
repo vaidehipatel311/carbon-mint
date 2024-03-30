@@ -11,7 +11,7 @@ import eventReducer from "./Events/reducers";
 export default combineReducers({
 
     landowners: landownerReducer,
-    onboarding: onboardingReducer,
+    // onboarding: onboardingReducer,
     landparcels: landparcelsReducer,
     login: loginReducer,
     events: eventReducer,

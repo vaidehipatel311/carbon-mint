@@ -605,7 +605,6 @@ function AddOperator({ addOperator }) {
 
 const mapStateToProps = (state) => {
     return {
-        onboarding: state.onboarding.onboarding,
     };
 };
 

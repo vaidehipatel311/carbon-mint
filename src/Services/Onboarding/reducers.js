@@ -1,22 +1,22 @@
-import * as actionTypes from './actionTypes';
+// import * as actionTypes from './actionTypes';
 
 
-const initialState = {
-    onboarding: []
-}
+// const initialState = {
+//     onboarding: []
+// }
 
-const onboardingReducer = (state = initialState, action) => {
-    switch (action.type) {
+// const onboardingReducer = (state = initialState, action) => {
+//     switch (action.type) {
 
-        case actionTypes.FETCH_ONBOARDING:
-            return {
-                ...state,
-                onboarding: action.payload.onboardingdata,
-            }
-        default:
-            return state
-    }
-}
+//         case actionTypes.FETCH_ONBOARDING:
+//             return {
+//                 ...state,
+//                 onboarding: action.payload.onboardingdata,
+//             }
+//         default:
+//             return state
+//     }
+// }
 
 
-export default onboardingReducer;
+// export default onboardingReducer;

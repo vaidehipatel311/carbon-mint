@@ -36,20 +36,20 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import { useLocation } from 'react-router-dom';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
+import { fetchLandOwners } from '../../Services/LandOwners/actions'
 
-import { fetchOnboarding } from '../../Services/Onboarding/actions'
-
-function DashBoard({ fetchOnboarding }) {
+function DashBoard({ fetchLandOwners }) {
 
     const [onboarding, setOnboarding] = useState([]);
     const location = useLocation();
     const [openAlert, setOpenAlert] = useState(false);
 
     useEffect(() => {
-        fetchOnboarding()
-            .then(data => {
-                setOnboarding(data);
+        fetchLandOwners()
+            .then((data) => {
                 console.log(data);
+                const pending = data.filter((p) => p.status === 'Pending')
+                setOnboarding(pending);
             })
             .catch(error => {
                 console.error('Error fetching dashboard data:', error);
@@ -59,7 +59,7 @@ function DashBoard({ fetchOnboarding }) {
             setOpenAlert(true);
         }
 
-    }, [location]);
+    }, [location, onboarding]);
 
     const handleCloseAlert = (event, reason) => {
         if (reason === 'clickaway') {
@@ -459,12 +459,12 @@ function DashBoard({ fetchOnboarding }) {
 
 const mapStateToProps = (state) => {
     return {
-        onboarding: state.onboarding.onboarding
+        // onboarding: state.onboarding.onboarding
     }
 }
 
 const mapDispatchToProps = {
-    fetchOnboarding: () => fetchOnboarding()
+    fetchLandOwners: () => fetchLandOwners()
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashBoard)

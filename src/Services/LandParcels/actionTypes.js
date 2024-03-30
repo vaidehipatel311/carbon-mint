@@ -1,1 +1,3 @@
 export const FETCH_LAND_PARCELS = 'FETCH_LAND_PARCELS';
+export const ADD_LAND_PARCEL = 'ADD_LAND_PARCEL';
+export const EDIT_PARCEL = 'EDIT_PARCEL';

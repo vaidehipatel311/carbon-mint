@@ -151,6 +151,10 @@
   height: 200px;
   align-content: center;
 
+  /* & .MuiTableCell-root {
+    height: 30px;
+  } */
+
 }
 
 .th {
@@ -164,6 +168,8 @@
 .tr {
   max-height: 10px;
   padding: 0px 16px;
+
+
 
 }
 

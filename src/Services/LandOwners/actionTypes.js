@@ -1,1 +1,4 @@
 export const FETCH_LAND_OWNERS = 'FETCH_LAND_OWNERS';
+export const ADD_LAND_OWNER = 'ADD_LAND_OWNER';
+export const EDIT_OWNER = 'EDIT_OWNER';
+

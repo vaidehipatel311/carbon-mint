@@ -8,8 +8,7 @@ import googleicon from '../../assets/Login/Socail Links.png'
 import graphicSide from '../../assets/Login/image 50.png'
 import { Button, TextField } from '@mui/material';
 import { connect } from 'react-redux'
-import * as action from '../../Services/Login/actions';
-import { useFormik } from 'formik';
+import { fetchUser, updateUserStatus } from '../../Services/Login/actions';
 import { useNavigate } from 'react-router-dom';
 import 'react-phone-input-2/lib/style.css'
 import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth'
@@ -17,18 +16,27 @@ import { auth } from '../../firebase';
 import PhoneInput from 'react-phone-input-2';
 
 
-function Login({ addUser }) {
+function Login({ fetchUser, updateUserStatus }) {
     const navigate = useNavigate();
 
     const [showOtp, setShowOtp] = useState(false);
     const [otp, setOtp] = useState('');
     const [phoneNo, setPhoneNo] = useState('')
+    const [user, setUser] = useState([])
     const [phoneOtp, setPhoneOtp] = useState(null)
     const [remainingTime, setRemainingTime] = useState(60);
     const [recaptchaVerifier, setRecaptchaVerifier] = useState(null);
 
 
     useEffect(() => {
+
+
+        fetchUser().then((data) => {
+            const filteredUser = data.filter((p) => p.contact === phoneNo);
+            setUser(filteredUser);
+            console.log(user);
+        })
+
         let timer;
         if (showOtp) {
             timer = setInterval(() => {
@@ -45,63 +53,47 @@ function Login({ addUser }) {
             setRemainingTime(60);
         }
 
+
         return () => clearInterval(timer);
-    }, [showOtp]);
 
-
-    const validate = values => {
-        const errors = {};
-        if (!values.phoneNo) {
-            errors.phoneNo = 'Required'
-        }
-        else if (values.phoneNo.length !== 10) {
-            errors.phoneNo = 'Must be 10 characters';
-        }
-        return errors;
-    }
-    const formik = useFormik({
-        initialValues: {
-            phoneNo: '',
-            otp: ''
-        },
-        validate,
-        onSubmit: (values) => {
-            navigate('/dashboard')
-        }
-    })
-
-
+    }, [phoneNo]);
 
     const handleClick = async () => {
         try {
+            if (user.length > 0) {
+                const recaptcha = new RecaptchaVerifier(auth, "recaptcha", {
+                    size: 'invisible',
+                    'callback': () => { }
+                })
+                setRecaptchaVerifier(recaptcha);
 
-            const recaptcha = new RecaptchaVerifier(auth, "recaptcha", {
-                size: 'invisible',
-                'callback': () => { }
-            })
-            setRecaptchaVerifier(recaptcha);
+                setShowOtp(true);
 
-            setShowOtp(true);
+                const confirmationResult = await signInWithPhoneNumber(auth, `+${phoneNo}`, recaptcha);
+                console.log(confirmationResult);
+                setPhoneOtp(confirmationResult);
+            }
 
-            const confirmationResult = await signInWithPhoneNumber(auth, `+${phoneNo}`, recaptcha);
-            console.log(confirmationResult);
-            setPhoneOtp(confirmationResult);
+            else {
+                alert('No user found with this contact number.');
+            }
 
         } catch (error) {
             console.error('Error sending OTP:', error);
         }
     };
 
-    const handleVerifyOTP = async () => {
+    const handleVerifyOTP = async (id, status) => {
         try {
             if (otp === '') {
                 alert('Please enter otp.')
             }
             else {
+
                 const userCredential = await phoneOtp.confirm(otp)
                 console.log(userCredential);
                 if (userCredential && userCredential.user) {
-                    addUser(phoneNo, otp)
+                    updateUserStatus(id, status)
                     navigate('/dashboard');
                 }
                 else { console.error("Invalid User Credentials") }
@@ -164,9 +156,9 @@ function Login({ addUser }) {
                             <Grid xs={12} sx={{ mt: 2, textAlign: 'center' }}>
                                 <Typography variant='p' sx={{ fontSize: 'small', color: 'red' }}>{remainingTime} seconds remaining</Typography>
                             </Grid>
-                            <Grid xs={12} sx={{ textAlign: 'center' }}>
-                                {/* <Link to='/dashboard' style={{ textDecoration: 'none', color: 'black' }}> */}
-                                <Button
+
+                            < Grid xs={12} sx={{ textAlign: 'center' }}>
+                                {user.map((b, index) => (<Button
                                     sx={{
                                         backgroundColor: '#8CD867',
                                         border: '1px solid black',
@@ -175,9 +167,9 @@ function Login({ addUser }) {
                                     size="large"
                                     variant="filled"
                                     className="button"
-                                    onClick={handleVerifyOTP}
+                                    onClick={() => handleVerifyOTP(b.id, "Logged_In")}
                                 >Sign In</Button>
-                                {/* </Link> */}
+                                ))}
                             </Grid>
 
                         </>)}
@@ -195,6 +187,7 @@ function Login({ addUser }) {
                             variant="filled"
                             onClick={handleClick}
                         >Send OTP</Button>
+
                     </Grid>)}
 
 
@@ -209,7 +202,7 @@ function Login({ addUser }) {
                 </Grid>
 
 
-            </Grid>
+            </Grid >
         </>
     )
 }
@@ -221,141 +214,10 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-    addUser: (phoneNo, otp) => action.addUser(phoneNo, otp)
+    // addUser: (phoneNo, otp) => action.addUser(phoneNo, otp),
+    fetchUser: () => fetchUser(),
+    updateUserStatus: (id, status) => updateUserStatus(id, status),
+
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React, { useState } from 'react'
-// import Box from '@mui/material/Box'
-// import Grid from '@mui/material/Grid';
-// import Typography from '@mui/material/Typography';
-// import finalLogo from '../../assets/Login/Final Logo.png'
-// import googleicon from '../../assets/Login/Socail Links.png'
-// import graphicSide from '../../assets/Login/image 50.png'
-// import { Button, TextField } from '@mui/material';
-// import './style.css';
-// import { connect } from 'react-redux'
-// import * as action from '../../Services/Login/actions';
-// import { Link } from 'react-router-dom';
-
-// function Login({ addUser }) {
-
-//     const [showOtp, setShowOtp] = useState(false);
-//     const [phoneNo, setPhoneNo] = useState('');
-//     const [otp, setOtp] = useState('');
-//     const [phoneNoError, setPhoneNoError] = useState('');
-
-//     const handleClick = () => {
-//         if (phoneNo.length !== 10) {
-//             setPhoneNoError('Please enter a valid phone number');
-//             return;
-//         }
-//         else {
-//             const otp = (Math.floor(Math.random() * 1000000) + 1)
-//             setOtp(otp)
-//             addUser(phoneNo, otp)
-//             setShowOtp(true);
-//         }
-
-//     }
-//     return (
-//         <>
-//             <Box sx={{ display: "flex" }}>
-//                 <Grid container >
-//                     <Grid item xs={6}>
-//                         <div >
-//                             <img className="graphicSide" src={graphicSide} alt="logo"></img>
-//                         </div>
-
-//                     </Grid>
-//                     <Grid item xs={6}>
-
-//                         <div className='form' style={{ marginTop: "235px", width: "436px", marginLeft: "200px", gap: "48px" }}>
-//                             <div className='logo' >
-//                                 <img className="finalLogo" src={finalLogo} alt="logo"></img>
-//                             </div>
-//                             <div style={{ gap: "40px" }}>
-//                                 <div align="left" >
-//                                     <Typography className="signintext" variant="p">Sign In</Typography>
-//                                 </div>
-//                                 {showOtp ?
-//                                     (<div style={{ gap: "16px" }} align="center">
-//                                         <div >
-//                                             <TextField type='text' value={phoneNo} sx={{ width: "436px", marginTop: "16px" }} label='Phone number'></TextField>
-//                                         </div>
-//                                         <div >
-//                                             <TextField type='text' value={otp} sx={{ width: "436px", marginTop: "16px" }} label='OTP'></TextField>
-//                                         </div>
-
-//                                         <Link to="/dashboard">
-//                                             <div className='button' onClick={() => { handleClick() }}>
-//                                                 <Button variant="filled" >Sign In</Button>
-//                                             </div>
-//                                         </Link>
-//                                     </div>)
-//                                     :
-//                                     (<div style={{ gap: "16px" }} align="center">
-//                                         <div >
-//                                             <TextField type='text' value={phoneNo} onChange={(e) => setPhoneNo(e.target.value)} sx={{ width: "436px", marginTop: "16px" }} label='Phone number'></TextField>
-//                                         </div>
-//                                         {phoneNoError && <Typography color="error">{phoneNoError}</Typography>}
-//                                         <div className='button' onClick={() => { handleClick() }}>
-//                                             <Button variant="filled"  >Send OTP</Button>
-//                                         </div>
-//                                     </div>)}
-//                                 <br></br>
-//                                 <div style={{ gap: "24px" }}>
-//                                     <Typography className="otheracc" variant='p' >or sign in with other accounts?</Typography>
-//                                     <div>
-//                                         <img className="googleicon" src={googleicon} alt="logo"></img>
-//                                     </div>
-//                                 </div>
-//                             </div>
-//                         </div>
-//                     </Grid>
-
-//                 </Grid>
-//             </Box >
-//         </>
-//     )
-// }
-
-// const mapStateToProps = (state) => {
-//     return {
-//         login: state.login.users
-//     }
-// }
-
-// const mapDispatchToProps = {
-//     addUser: (phoneNo, otp) => action.addUser(phoneNo, otp)
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Login)
-
-

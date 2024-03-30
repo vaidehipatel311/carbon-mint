@@ -20,7 +20,6 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import * as action from '../../Services/Operator/actions';
-import * as daction from '../../Services/Onboarding/actions';
 import { connect } from 'react-redux';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -30,9 +29,10 @@ import corner_field from '../../assets/LandOwners/Vector.png'
 import { Link } from 'react-router-dom';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import axios from '../../Utils/axios';
+import * as urls from '../../Config/urls';
 
-
-function Operator({ fetchOperator, fetchOnboarding }) {
+function Operator({ fetchOperator }) {
 
     const [operators, setOperators] = useState([]);
     const [onboarding, setonboarding] = useState([]);
@@ -40,60 +40,74 @@ function Operator({ fetchOperator, fetchOnboarding }) {
     useEffect(() => {
         fetchOperator()
             .then((data) => {
-                setOperators(data);
+                const approved = data.filter((p) => p.status === "Approved");
+                setOperators(approved);
+                const pending = data.filter((p) => p.status === "Pending");
+                setonboarding(pending);
             })
             .catch(err => console.log(err))
 
-        fetchOnboarding()
-            .then((data) => {
-                setonboarding(data);
-            })
-            .catch(err => console.log(err))
+    }, [operators]);
 
-    }, []);
+    const handleDelete = async (id) => {
+        try {
+            const updatedOperators = [...operators];
+            setOperators(updatedOperators);
+            await axios.delete(urls.operatorUrl + `/${id}`);
+            fetchOperator();
 
-
+        } catch (error) {
+            console.error('Error deleting item from cart:', error);
+        }
+    };
 
 
     const generateOperators = () => {
-        return operators.slice(0, 5).map((owners, index) => (
-            <TableBody>
-                <TableRow className='tr'>
-                    <Link to='/operator/profile' style={{ textDecoration: "none", color: "black" }}>
-                        <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7', display: "flex" }}>
-                            <Avatar sx={{ background: 'none' }}><img src={corner_field} className='photo' alt="corner-field"></img></Avatar><div style={{ fontWeight: "bold", marginLeft: "15px", marginTop: "10px" }}>{owners.name}</div>
-                        </TableCell>
+        return operators.map((owners, index) => (
+            // <TableBody>
+            <TableRow className='tr'>
+
+                <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}>
+                    <Link to='/operator/profile' style={{ textDecoration: "none", color: "black", display: "flex" }}>
+                        <Avatar sx={{ background: 'none' }}><img src={corner_field} className='photo' alt="corner-field"></img></Avatar>
+                        <div style={{ fontWeight: "bold", marginLeft: "15px", marginTop: "10px" }}>{owners.name}</div>
                     </Link>
+                </TableCell>
 
-                    <TableCell align='center' sx={{ color: "rgb(62, 205, 62)", borderRight: '1px solid #d7d7d7' }}>{owners.ownerID}</TableCell>
-                    <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}>{owners.passbook_refno}</TableCell>
-                    <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}>{owners.contact_number_1}</TableCell>
-                    <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}>{owners.village}</TableCell>
-                    <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}><button className="grid-button" >{owners.crops[0]}</button><button className="grid-button" >{owners.crops[1]}</button></TableCell>
-                    <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}><EditIcon /><DeleteIcon /></TableCell>
+                <TableCell align='center' sx={{ color: "rgb(62, 205, 62)", borderRight: '1px solid #d7d7d7' }}>{owners.ownerID}</TableCell>
+                <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}>{owners.passbook_refno}</TableCell>
+                <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}>{owners.contact_number_1}</TableCell>
+                <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}>{owners.village}</TableCell>
+                <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}><button className="grid-button" >{owners.crops[0]}</button><button className="grid-button" >{owners.crops[1]}</button></TableCell>
+                <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}>
+                    <EditIcon />
+                    <DeleteIcon onClick={() => { handleDelete(owners.id) }} /></TableCell>
 
-                </TableRow>
-            </TableBody>
+            </TableRow>
+            // </TableBody>
         ));
     }
     const generateOnBoarding = () => {
         return onboarding.map((owners, index) => (
-            <TableBody>
-                <TableRow className='tr'>
-                    <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7', display: "flex" }}>
+            // <TableBody>
+            <TableRow className='tr'>
+                <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}>
+                    <div style={{ display: "flex" }}>
                         <Avatar sx={{ background: 'none' }}><img src={corner_field} className='photo' alt="corner-field"></img></Avatar>
                         <div style={{ fontWeight: "bold", marginLeft: "15px", marginTop: "10px" }}>{owners.name}</div>
-                    </TableCell>
-                    <TableCell align='center' sx={{ color: "rgb(62, 205, 62)", borderRight: '1px solid #d7d7d7' }}>{owners.ownerId}</TableCell>
-                    <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}>{owners.aadhar}</TableCell>
-                    <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}>{owners.contactno}</TableCell>
-                    <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}>{owners.village}</TableCell>
-                    <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}><button className="status-button" >{owners.status}</button></TableCell>
-                    <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}><RemoveRedEyeIcon /></TableCell>
+                    </div>
+                </TableCell>
+                <TableCell align='center' sx={{ color: "rgb(62, 205, 62)", borderRight: '1px solid #d7d7d7' }}>{owners.ownerID}</TableCell>
+                <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}>{owners.aadhar_no}</TableCell>
+                <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}>{owners.contact_number_1}</TableCell>
+                <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}>{owners.village}</TableCell>
+                <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}><button className="status-button" >{owners.status}</button></TableCell>
+
+                <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}><Link to='/operator/profile' style={{ textDecoration: "none", color: "black" }}><RemoveRedEyeIcon /></Link></TableCell>
 
 
-                </TableRow>
-            </TableBody>
+            </TableRow>
+            // </TableBody>
         ));
     }
 
@@ -251,7 +265,7 @@ function Operator({ fetchOperator, fetchOnboarding }) {
                     </TableContainer>
                     <Grid container sx={{ mt: 3 }} >
                         <Grid xs={9} className='total-events'>
-                            <Typography sx={{ color: 'gray' }}>96 Operators</Typography>
+                            <Typography sx={{ color: 'gray' }}>{operators.length} Operators</Typography>
                         </Grid>
                         <Grid xs={3} className='pagination'>
                             <Stack spacing={2}>
@@ -283,7 +297,7 @@ function Operator({ fetchOperator, fetchOnboarding }) {
                     </TableContainer>
                     <Grid container sx={{ mt: 3 }} >
                         <Grid xs={9} className='total-events'>
-                            {/* <Typography sx={{ color: 'gray' }}>128 Events</Typography> */}
+                            <Typography sx={{ color: 'gray' }}>{onboarding.length} Onboarding Operators</Typography>
                         </Grid>
                         <Grid xs={3} className='pagination'>
                             <Stack spacing={2}>
@@ -305,14 +319,13 @@ function Operator({ fetchOperator, fetchOnboarding }) {
 
 const mapStateToProps = (state) => {
     return {
-        landOwners: state.landowners.landowners,
-        onboarding: state.onboarding.onboarding,
+        // landOwners: state.landowners.landowners,
+        // onboarding: state.onboarding.onboarding,
     };
 };
 
 const mapDispatchToProps = {
     fetchOperator: () => action.fetchOperator(),
-    fetchOnboarding: () => daction.fetchOnboarding()
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Operator);

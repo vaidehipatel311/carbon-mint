@@ -15,10 +15,10 @@ import PersonIcon from '@mui/icons-material/Person';
 export default function Sidebar() {
     const location = useLocation();
     const isActive1 = location.pathname === '/dashboard';
-    const isActive2 = location.pathname === '/landowners';
-    const isActive3 = location.pathname === '/landparcels';
+    const isActive2 = location.pathname === '/landowners' || location.pathname.includes('/landowners/add-landowner') || location.pathname.includes('/landowners/add-landowner/:id');
+    const isActive3 = location.pathname === '/landparcels' || location.pathname.includes('/landparcels/add-landparcel') || location.pathname.includes('/landparcels/add-landparcel/:id');
     const isActive4 = location.pathname.includes('/operator') || location.pathname.includes('/operator/add-operator') || location.pathname.includes('/operator/profile') || location.pathname.includes('/operator/profile/landparcel') || location.pathname.includes('/operator/profile/landparcel/crops');
-    const isActive5 = location.pathname.includes('/events/1') || location.pathname.includes('/events/2');
+    const isActive5 = location.pathname.includes('/events') || location.pathname.includes('/events/eventDescription');
 
 
     const dashboardStyles = {
@@ -94,7 +94,7 @@ export default function Sidebar() {
                                 </div>
                             </Link>
 
-                            <Link to='/events/1' style={{ textDecoration: 'none', color: 'black' }}>
+                            <Link to='/events' style={{ textDecoration: 'none', color: 'black' }}>
                                 <div className='div' style={eventsStyles}>
                                     <CalendarMonthIcon className='icon' ></CalendarMonthIcon>
                                     <Typography variant='p'>Events</Typography>

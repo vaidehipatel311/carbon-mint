@@ -1,11 +1,11 @@
 # Carbon Mint
 
-A web dashboard for managing land owners, parcels, and related operations. Built with React, Redux, MUI, and Firebase (or your chosen backend/services).
+A web dashboard for managing land owners, parcels, and related operations. Built with React, Redux, MUI, and Firebase.
 
 ## Live Demo
 
 **Deployed Website:** [https://your-deployed-url.com](https://your-deployed-url.com)  
-*(Replace the above with the actual production URL, e.g., your Render/Vercel/Netlify domain.)*
+
 
 ## Features
 
